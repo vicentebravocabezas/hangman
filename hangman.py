@@ -7,12 +7,10 @@ def inicio():
     intentos = 7
     #se utiliza getpass para volver invisible la palabra en la terminal
     palabra = getpass.getpass('Escribe tu palabra: ').strip().upper()
-    
-    letras = list(palabra)
-    
+        
     guiones = ""
     
-    for _ in letras:
+    for _ in palabra:
         guiones += "_ "
         
     guiones = guiones.strip()
@@ -22,8 +20,7 @@ def inicio():
     desarrollo(palabra, intentos)
     
 def desarrollo(palabra, intentos):
-    letras_palabra = list(palabra)
-    
+ 
     letras_adivinadas = []
     
     while intentos > 0:
@@ -40,14 +37,14 @@ def desarrollo(palabra, intentos):
             print("\nLetra ya escojida anteriormente. Escoje nuevamente")
             continue
         
-        if letra_escojida in letras_palabra:
+        if letra_escojida in palabra:
             letras_adivinadas.append(letra_escojida)
         else:
             intentos -= 1
             print(f"\nIncorrecto! Te quedan {intentos} intentos")
             continue
             
-        for letra in letras_palabra:
+        for letra in palabra:
             if letra in letras_adivinadas:
                 mostrar += letra+" "
             else:
