@@ -5,8 +5,9 @@ def inicio():
     print('Bienvenido al juego del ahorcado.\n\nA continuación escojerás la palabra para jugar y después tendrás 7 oportunidades para adivinar la palabra\n')
 
     intentos = 7
+    
     #se utiliza getpass para volver invisible la palabra en la terminal
-    palabra = getpass.getpass('Escribe tu palabra: ').strip().upper()
+    palabra = getpass.getpass('Escribe tu palabra y presiona "Enter": ').strip().upper()
         
     guiones = ""
     
@@ -15,12 +16,11 @@ def inicio():
         
     guiones = guiones.strip()
 
-    print(f'\n{guiones}\n\nTienes {intentos} intentos. Suerte!')
+    print(f'\n---------------------------------------\nLa palabra tiene {len(palabra)} letras:\n\n{guiones}\n\nTienes {intentos} intentos. Suerte!')
     
     desarrollo(palabra, intentos)
     
 def desarrollo(palabra, intentos):
- 
     letras_adivinadas = []
     
     while intentos > 0:
@@ -37,13 +37,13 @@ def desarrollo(palabra, intentos):
             print("\nLetra ya escojida anteriormente. Escoje nuevamente")
             continue
         
-        if letra_escojida in palabra:
-            letras_adivinadas.append(letra_escojida)
-        else:
+        if letra_escojida not in palabra:
             intentos -= 1
             print(f"\nIncorrecto! Te quedan {intentos} intentos")
             continue
             
+        letras_adivinadas.append(letra_escojida)
+        
         for letra in palabra:
             if letra in letras_adivinadas:
                 mostrar += letra+" "
@@ -58,10 +58,13 @@ def desarrollo(palabra, intentos):
     resultado(palabra, intentos)
 
 def resultado(palabra, intentos):
+    print('\n------------------------------------------------------------------\n')
     if intentos == 0:
-        print(f'\nSe te acabaron los intentos! La palabra era "{palabra}"\nMejor suerte la próxima vez!')
+        print(f'Se te acabaron los intentos! La palabra era "{palabra}"\nMejor suerte la próxima vez!')
     else:
-        print(f'\nLa palabra es "{palabra}"! Ganaste. Felicitaciones!')    
+        print(f'La palabra es "{palabra}"! Ganaste. Felicitaciones!')
+        
+    input(f'\nPresiona "Enter" para salir')
     
     
 if __name__ == "__main__":
