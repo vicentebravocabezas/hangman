@@ -1,10 +1,8 @@
 import getpass
 #mensaje de bienvenida
 
-def inicio():
+def establecer_palabra(intentos: int) -> str:
     print('Bienvenido al juego del ahorcado.\n\nA continuación escojerás la palabra para jugar y después tendrás 7 oportunidades para adivinar la palabra\n')
-
-    intentos = 7
     
     #se utiliza getpass para volver invisible la palabra en la terminal
     palabra = getpass.getpass('Escribe tu palabra y presiona "Enter": ').strip().upper()
@@ -18,9 +16,9 @@ def inicio():
 
     print(f'\n---------------------------------------\nLa palabra tiene {len(palabra)} letras:\n\n{guiones}\n\nTienes {intentos} intentos. Suerte!')
     
-    desarrollo(palabra, intentos)
+    return palabra
     
-def desarrollo(palabra, intentos):
+def jugar(palabra: str, intentos: int) -> int:
     letras_adivinadas = []
     
     while intentos > 0:
@@ -54,18 +52,26 @@ def desarrollo(palabra, intentos):
             break
         
         print(f"\n{mostrar}")
-                
-    resultado(palabra, intentos)
+        
+    return intentos
+    
 
-def resultado(palabra, intentos):
+def resultado(palabra: str, intentos: int):
     print('\n------------------------------------------------------------------\n')
     if intentos == 0:
         print(f'Se te acabaron los intentos! La palabra era "{palabra}"\nMejor suerte la próxima vez!')
     else:
-        print(f'La palabra es "{palabra}"! Ganaste. Felicitaciones!')
+        print(f'Ganaste! La palabra es "{palabra}". Felicitaciones!')
         
     input(f'\nPresiona "Enter" para salir')
     
     
 if __name__ == "__main__":
-    inicio()
+    intentos = 7
+    
+    palabra = establecer_palabra(intentos)
+    
+    intentos = jugar(palabra, intentos)
+    
+    resultado(palabra, intentos)
+    
