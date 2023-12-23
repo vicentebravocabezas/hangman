@@ -2,10 +2,10 @@ import getpass
 #mensaje de bienvenida
 
 def establecer_palabra(intentos: int) -> str:
-    print('Bienvenido al juego del ahorcado.\n\nA continuación escojerás la palabra para jugar y después tendrás 7 oportunidades para adivinar la palabra\n')
+    print('Bienvenidos al juego del ahorcado.\n\nA continuación un jugador deberá escojer la palabra y el resto tendrá 7 oportunidades para adivinar la palabra\n')
     
     #se utiliza getpass para volver invisible la palabra en la terminal
-    palabra = getpass.getpass('Escribe tu palabra y presiona "Enter": ').strip().upper()
+    palabra = getpass.getpass('Escribe la palabra y presiona "Enter" (no se mostrará lo que escribes): ').strip().upper()
         
     guiones = ""
     
@@ -47,12 +47,14 @@ def jugar(palabra: str, intentos: int) -> int:
                 mostrar += letra+" "
             else:
                 mostrar += "_ "
-                
+        
+        # la variable mostrar está dentro del bloque while, por lo tanto no se puede revisar la condición en la declaración del bucle
         if "_" not in mostrar:
             break
         
         print(f"\n{mostrar}")
         
+    # el mensaje final dependerá del número de intentos para inferir si el jugador ganó o perdió
     return intentos
     
 
